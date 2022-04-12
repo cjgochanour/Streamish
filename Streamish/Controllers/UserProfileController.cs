@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Streamish.Models;
+using Streamish.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,36 +11,57 @@ namespace Streamish.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        // GET: api/<UserProfileController>
+        private readonly IUserProfileRepository _profileRepo;
+        public UserProfileController(IUserProfileRepository userProfileRepository)
+        {
+            _profileRepo = userProfileRepository;
+        }
+
+        // GET: api/UserProfile
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_profileRepo.GetAll());
         }
 
-        // GET api/<UserProfileController>/5
+        // GET api/UserProfile/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var user = _profileRepo.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
-        // POST api/<UserProfileController>
+        // POST api/UserProfile
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(UserProfile profile)
         {
+            _profileRepo.Add(profile);
+            return CreatedAtAction("Get", new { id = profile.Id }, profile);
         }
 
-        // PUT api/<UserProfileController>/5
+        // PUT api/UserProfile/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, UserProfile profile)
         {
+            if (id != profile.Id)
+            {
+                return BadRequest();
+            }
+            _profileRepo.Update(profile);
+            return NoContent();
         }
 
-        // DELETE api/<UserProfileController>/5
+        // DELETE api/UserProfile/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _profileRepo.Delete(id);
+            return NoContent();
         }
     }
 }

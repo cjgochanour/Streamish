@@ -7,7 +7,7 @@ using Streamish.Utils;
 
 namespace Streamish.Repositories
 {
-    public class UserProfileRepository : BaseRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -20,7 +20,7 @@ namespace Streamish.Repositories
                 {
                     cmd.CommandText = @"SELECT up.Id, up.Name, up.Email, up.DateCreated, up.ImageUrl
                                         FROM UserProfile up";
-                    
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         var users = new List<UserProfile>();
