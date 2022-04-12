@@ -19,7 +19,7 @@ namespace Streamish.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT up.Id, up.Name, up.Email, up.DateCreated, up.ImageUrl
-                                        FROM UserProfile";
+                                        FROM UserProfile up";
                     
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -40,5 +40,40 @@ namespace Streamish.Repositories
                 }
             }
         }
+
+        public UserProfile GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT up.Id, up.Name, up.Email, up.DateCreated, up.ImageUrl
+                                        FROM UserProfile up
+                                        WHERE up.Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        UserProfile profile = null;
+                        if (reader.Read())
+                        {
+                            profile = new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
+                                ImageUrl = DbUtils.GetString(reader, "ImageUrl")
+                            };
+                        }
+                        return profile;
+                    }
+                }
+            }
+        }
+
+
+
     }
 }
