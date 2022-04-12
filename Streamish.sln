@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamish", "Streamish\Streamish.csproj", "{412F9B4D-2FF9-4FEC-9AC8-B4521C9E3B65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{412F9B4D-2FF9-4FEC-9AC8-B4521C9E3B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{412F9B4D-2FF9-4FEC-9AC8-B4521C9E3B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{412F9B4D-2FF9-4FEC-9AC8-B4521C9E3B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{412F9B4D-2FF9-4FEC-9AC8-B4521C9E3B65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87C7B12C-DAEF-4D7A-9BBD-C36F8830D7DE}
+	EndGlobalSection
+EndGlobal
