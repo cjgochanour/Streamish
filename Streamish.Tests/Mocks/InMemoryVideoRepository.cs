@@ -68,7 +68,9 @@ namespace Streamish.Tests.Mocks
 
         public List<Video> Search(string criterion, bool sortDescending)
         {
-            throw new NotImplementedException();
+            List<Video> searchResults = _data.Where(p => p.Title.Contains(criterion) || p.Description.Contains(criterion)).ToList();
+
+            return sortDescending ? searchResults.OrderByDescending(p => p.DateCreated).ToList() : searchResults.OrderBy(p => p.DateCreated).ToList();
         }
 
         public List<Video> GetAllWithComments()

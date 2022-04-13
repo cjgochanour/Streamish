@@ -179,6 +179,33 @@ namespace Streamish.Tests
             Assert.Null(videoFromDb);
         }
 
+        [Fact]
+        public void Search_Finds_Proper_Video_By_Title()
+        {
+            var count = 4;
+            var newTitle = "Search me pls";
+            var videosToTest = CreateTestVideos(10);
+            for (var i = 0; i < count; i++)
+            {
+                videosToTest[i].Title = newTitle;
+            }
+
+            var repo = new InMemoryVideoRepository(videosToTest);
+            var controller = new VideoController(repo);
+
+            var result = controller.Search(newTitle, false);
+
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var searchResults = Assert.IsType<List<Video>>(okResult.Value);
+
+            Assert.Equal(count, searchResults.Count);
+            foreach (var v in searchResults)
+            {
+                Assert.Equal(newTitle, v.Title);
+            }
+
+        }
+
         private List<Video> CreateTestVideos(int count)
         {
             var videos = new List<Video>();
