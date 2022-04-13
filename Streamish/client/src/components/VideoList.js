@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Video from "./Video";
-import { getAllVideos } from "../modules/videoManager";
+import { Form, Input, Label, Button } from "reactstrap";
+import { getAllVideos, searchVideo } from "../modules/videoManager";
+import Search from "./Search.js";
 
-const VideoList = () => {
+const VideoList = ({ searchResults }) => {
     const [videos, setVideos] = useState([]);
 
     const getVideos = () => {
@@ -14,13 +16,16 @@ const VideoList = () => {
     }, []);
 
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                {videos.map((video) => (
-                    <Video video={video} key={video.id} />
-                ))}
+        <>
+            <Search stateSetter={setVideos} />
+            <div className="container">
+                <div className="row justify-content-center">
+                    {videos.map((video) => (
+                        <Video video={video} key={video.id} />
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

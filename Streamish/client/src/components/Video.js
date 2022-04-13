@@ -19,9 +19,7 @@ const Video = ({ video }) => {
                     <strong>{video.title}</strong>
                 </p>
                 <p>{video.description}</p>
-                {video.comments.map((c) => (
-                    <p>{c.message}</p>
-                ))}
+                {video.comments != null && video.comments.map((c) => <p key={c.id}>{c.message}</p>)}
             </CardBody>
         </Card>
     );

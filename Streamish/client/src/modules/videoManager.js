@@ -13,3 +13,7 @@ export const addVideo = (video) => {
         body: JSON.stringify(video),
     });
 };
+
+export const searchVideo = (query, sort) => {
+    return fetch(`${baseUrl}/search?q=${query}&sortDesc=${sort}`).then((res) => res.json());
+};
