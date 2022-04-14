@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using Streamish.Models;
 using Streamish.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Streamish.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -34,6 +36,17 @@ namespace Streamish.Controllers
                 return NotFound();
             }
             return Ok(user);
+        }
+
+        [HttpGet("{firebaseUserId}")]
+        public IActionResult GetByFirebaseUserId(string firebaseUserId)
+        {
+            var userProfile = _profileRepo.GetByFirebaseUserId(firebaseUserId);
+            if (userProfile == null)
+            { 
+                return NotFound();
+            }
+            return Ok(userProfile);
         }
 
         [HttpGet("GetWithVideos/{id}")]
