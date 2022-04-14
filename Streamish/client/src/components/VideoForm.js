@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Form, Input, Label, FormGroup, Container, Col, Button } from "reactstrap";
 import { addVideo } from "../modules/videoManager.js";
 
@@ -6,6 +7,7 @@ export const VideoForm = ({ getVideos }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState("");
+    const history = useHistory();
 
     const makeNewVideoHappen = () => {
         //make a new video object using the state given by user
@@ -19,6 +21,7 @@ export const VideoForm = ({ getVideos }) => {
             setTitle("");
             setDescription("");
             setUrl("");
+            history.push("/");
         });
     };
 
@@ -48,3 +51,5 @@ export const VideoForm = ({ getVideos }) => {
         </Container>
     );
 };
+
+export default VideoForm;
