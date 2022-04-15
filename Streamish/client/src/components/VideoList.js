@@ -22,7 +22,7 @@ const VideoList = ({ searchResults }) => {
                 <VideoForm getVideos={getVideos} />
                 <Search stateSetter={setVideos} />
                 <div className="row justify-content-center">
-                    {videos.map((video) => (
+                    {videos?.map((video) => (
                         <Video video={video} key={video.id} />
                     ))}
                 </div>
