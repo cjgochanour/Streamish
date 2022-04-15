@@ -4,25 +4,23 @@ import VideoList from "./VideoList";
 import VideoForm from "./VideoForm";
 import VideoDetails from "./VideoDetails.js";
 import UserVideos from "./UserVideos.js";
+import { Redirect } from "react-router-dom";
+import Login from "./Login.js";
 
-const ApplicationViews = () => {
+const ApplicationViews = ({ isLoggedIn }) => {
     return (
         <Switch>
             <Route path="/" exact>
-                <VideoList />
+                {isLoggedIn ? <VideoList /> : <Redirect to="/login" />}
             </Route>
 
-            <Route path="/videos/add">
-                <VideoForm />
-            </Route>
+            <Route path="/videos/add">{isLoggedIn ? <VideoForm /> : <Redirect to="/login" />}</Route>
 
-            <Route path="/videos/:id">
-                <VideoDetails />
-            </Route>
+            <Route path="/videos/:id">{isLoggedIn ? <VideoDetails /> : <Redirect to="/login" />}</Route>
 
-            <Route path="/users/:id">
-                <UserVideos />
-            </Route>
+            <Route path="/users/:id">{isLoggedIn ? <UserVideos /> : <Redirect to="/login" />}</Route>
+
+            <Route path="/login">{!isLoggedIn ? <Login /> : <Redirect to="/" />}</Route>
         </Switch>
     );
 };

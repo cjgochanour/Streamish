@@ -19,8 +19,8 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <Header />
-                <ApplicationViews />
+                <Header isLoggedIn={isLoggedIn} />
+                <ApplicationViews isLoggedIn={isLoggedIn} />
             </Router>
         </div>
     );

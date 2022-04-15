@@ -151,7 +151,7 @@ namespace Streamish.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT up.Id, up.FirebaseUserId up.Name, up.Email, up.DateCreated, up.ImageUrl
+                    cmd.CommandText = @"SELECT up.Id, up.FirebaseUserId, up.Name, up.Email, up.DateCreated, up.ImageUrl
                                         FROM UserProfile up
                                         WHERE up.FirebaseUserId = @id";
                     cmd.Parameters.AddWithValue("@id", id);
